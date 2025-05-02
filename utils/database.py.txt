@@ -1,0 +1,16 @@
+```python
+   from supabase import create_client
+   import os
+   
+   class Database:
+       def __init__(self):
+           self.supabase = create_client(
+               os.getenv("SUPABASE_URL"),
+               os.getenv("SUPABASE_KEY")
+           )
+   
+       def save_company(self, company_data):
+           return self.supabase.table('companies').insert(company_data).execute()
+   
+       def get_companies(self):
+           return self.supabase.table('companies').select("*").execute()
